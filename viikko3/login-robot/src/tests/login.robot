@@ -8,11 +8,11 @@ Login With Correct Credentials
     Output Should Contain  Logged in
 
 Login With Incorrect Password
-    Input Credentials  kalle  helloworld
+    Input Credentials  kalle  hello
     Output Should Contain  Invalid username or password
 
 Login With Nonexistent username
-    Input Credentials  hello  world
+    Input Credentials  hello  world123
     Output Should Contain  Invalid username or password
 
 *** Keywords ***
