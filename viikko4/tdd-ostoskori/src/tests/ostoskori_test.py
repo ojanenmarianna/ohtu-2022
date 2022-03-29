@@ -70,3 +70,10 @@ class TestOstoskori(unittest.TestCase):
         self.kori.poista_tuote(self.maito)
 
         self.assertEqual(self.kori.tavaroita_korissa(), 1)
+
+    def test_metodi_tyhjenna_tyhjentaa_korin(self):
+        self.kori.lisaa_tuote(self.maito)
+        self.kori.lisaa_tuote(self.mehu)
+        self.kori.tyhjenna()
+        
+        self.assertEqual(self.kori.tavaroita_korissa(), 0)
