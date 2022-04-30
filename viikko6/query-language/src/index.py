@@ -1,5 +1,6 @@
 from statistics import Statistics
 from player_reader import PlayerReader
+from query_builder import QueryBuilder
 from matchers import And, HasAtLeast, PlaysIn, Not, HasFewerThan, Or
 
 def main():
@@ -7,10 +8,20 @@ def main():
     reader = PlayerReader(url)
     stats = Statistics(reader)
 
-    matcher = Or(
-        HasAtLeast(30, "goals"),
-        HasAtLeast(50, "assists")
-)
+    query = QueryBuilder()
+    matcher = (
+      query
+        .oneOf(
+          query.playsIn("PHI")
+            .hasAtLeast(10, "assists")
+            .hasFewerThan(5, "goals")
+            .build(),
+          query.playsIn("EDM")
+            .hasAtLeast(40, "points")
+            .build()
+        )
+        .build()
+      )
 
     for player in stats.matches(matcher):
         print(player)
